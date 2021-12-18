@@ -34,7 +34,7 @@ function App() {
           />
         </Grid>
         <Grid xs={12} md={8}>
-          <Map />
+          <Map places={places} />
         </Grid>
       </Grid>
     </div>

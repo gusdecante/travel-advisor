@@ -1,5 +1,6 @@
 import { makeStyles, Box } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
+import { LocationOnOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   mapContainer: {
@@ -8,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Map() {
+export default function Map({ places }) {
   const classes = useStyles();
 
   const defaultProps = {
@@ -29,7 +30,18 @@ export default function Map() {
         defaultZoom={defaultProps.zoom}
         margin={[50, 50, 50, 50]}
         options={{ disableDefaultUI: true, zoomControl: true }}
-      ></GoogleMapReact>
+      >
+        {places.length > 0 &&
+          places.map((place, index) => (
+            <div
+              lat={Number(place.latitude)}
+              lng={Number(place.longitude)}
+              key={index}
+            >
+              <LocationOnOutlined color="primary" fontSize="large" />
+            </div>
+          ))}
+      </GoogleMapReact>
     </Box>
   );
 }
