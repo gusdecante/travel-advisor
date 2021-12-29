@@ -7,6 +7,7 @@ import {
   CircularProgress,
   Grid,
 } from "@material-ui/core";
+import { useState, useEffect, createRef } from "react";
 
 import { PlaceDetails } from "../index";
 
@@ -39,7 +40,16 @@ export default function List({
   childClicked,
   places,
 }) {
+  const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
+
+  useEffect(() => {
+    setElRefs((refs) => {
+      return Array(places.length)
+        .fill()
+        .map((_, index) => refs[index] || createRef());
+    });
+  }, [places]);
   return (
     <div className={classes.container}>
       {isLoading ? (
@@ -63,8 +73,13 @@ export default function List({
           <Grid container spacing={3} className={classes.list}>
             {places &&
               places.map((place, index) => (
-                <Grid item xs={12}>
-                  <PlaceDetails place={place} key={index} />
+                <Grid ref={elRefs[index]} item xs={12}>
+                  <PlaceDetails
+                    selected={Number(childClicked) === index}
+                    placeRef={elRefs[index]}
+                    place={place}
+                    key={index}
+                  />
                 </Grid>
               ))}
           </Grid>

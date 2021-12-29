@@ -8,7 +8,10 @@ import {
 import { Rating } from "@material-ui/lab";
 import { LocationOn, Phone } from "@material-ui/icons";
 
-export default function PlaceDetails({ place }) {
+export default function PlaceDetails({ place, placeRef, selected }) {
+  if (selected) {
+    placeRef?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
   return (
     <Card elevation={8}>
       <CardMedia
