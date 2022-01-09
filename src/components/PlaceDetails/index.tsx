@@ -8,7 +8,30 @@ import {
 import { Rating } from "@material-ui/lab";
 import { LocationOn, Phone } from "@material-ui/icons";
 
-export default function PlaceDetails({ place, placeRef, selected }) {
+interface PlaceDetailsProps {
+  place: {
+    photo: {
+      images: {
+        large: {
+          url: string;
+        };
+      };
+    };
+    name: string;
+    num_reviews: string;
+    rating: string;
+    phone: string;
+    address: string;
+  };
+  placeRef: any;
+  selected: any;
+}
+
+export default function PlaceDetails({
+  place,
+  placeRef,
+  selected,
+}: PlaceDetailsProps) {
   if (selected) {
     placeRef?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -30,7 +53,7 @@ export default function PlaceDetails({ place, placeRef, selected }) {
         <Box display="flex" justifyContent="space-between" my={2}>
           <Rating name="read-only" value={Number(place.rating)} />
           <Typography>
-            {place.num_reviews} review{place.num_reviews > 1 && "s"}
+            {place.num_reviews} review{parseInt(place.num_reviews) > 1 && "s"}
           </Typography>
         </Box>
         {place.address && (

@@ -1,10 +1,6 @@
-import { AppBar, makeStyles, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontSize: 24,
-  },
-}));
+import useStyles from "./styles";
 
 export default function Header() {
   const classes = useStyles();

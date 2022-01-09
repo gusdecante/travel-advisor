@@ -1,5 +1,4 @@
 import {
-  makeStyles,
   FormControl,
   InputLabel,
   Select,
@@ -9,29 +8,17 @@ import {
 } from "@material-ui/core";
 import { useState, useEffect, createRef } from "react";
 
-import { PlaceDetails } from "../index";
+import { PlaceDetails } from "../";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    padding: 25,
-  },
-  formControl: {
-    margin: 10,
-    minWidth: 120,
-    marginBottom: 30,
-  },
-  loading: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  list: {
-    heigth: "75vh",
-    overflow: "auto",
-  },
-}));
+import useStyles from "./styles";
+
+// interface ListProps {
+//   type: any;
+//   setType: any;
+//   isLoading: any;
+//   childClicked: any;
+//   places: any;
+// }
 
 export default function List({
   type,
@@ -42,6 +29,10 @@ export default function List({
 }) {
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log(type);
+  });
 
   useEffect(() => {
     setElRefs((refs) => {

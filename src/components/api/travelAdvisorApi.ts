@@ -1,6 +1,18 @@
 import axios from "axios";
+import { Coords } from "google-map-react";
+import { Place } from "../../App";
 
-export const getPlaceData = async (type, sw, ne) => {
+// interface GetPlaceDataProps {
+//   type: string;
+//   sw: Coords;
+//   ne: Coords;
+// }
+
+export const getPlaceData = async (
+  type: string,
+  sw: Coords,
+  ne: Coords
+): Promise<Place[]> => {
   try {
     const {
       data: { data },
@@ -15,7 +27,8 @@ export const getPlaceData = async (type, sw, ne) => {
         },
         headers: {
           "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
-          "x-rapidapi-key": process.env.REACT_APP_TRAVEL_API_KEY,
+          "x-rapidapi-key":
+            "db182f9a64mshb820892725422fap1ffa58jsna16b64dd1fb0",
         },
       }
     );

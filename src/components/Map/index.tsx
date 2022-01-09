@@ -1,26 +1,33 @@
-import { makeStyles, Box, Typography, Paper } from "@material-ui/core";
+import { Box, Typography, Paper } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import GoogleMapReact from "google-map-react";
+import GoogleMapReact, { Coords } from "google-map-react";
 import { LocationOnOutlined } from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
-  mapContainer: {
-    height: "85vh",
-    width: "100%",
-  },
-  paper: {
-    width: 100,
-    diplay: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    padding: 10,
-  },
-  cardImage: {
-    height: 80,
-    width: 80,
-    cursor: "pointer",
-  },
-}));
+import { ContainerMap } from "../";
+
+import useStyles from "./styles";
+
+type Place = {
+  name: string;
+  latitude: string;
+  longitude: string;
+  photo: {
+    images: {
+      large: {
+        url: string;
+      };
+    };
+  };
+  rating: string;
+};
+
+interface MapProps {
+  coords: Coords | undefined;
+  places: Place[];
+  setBounds: any;
+  setCoords: any;
+  setChildClicked: any;
+}
 
 export default function Map({
   coords,
@@ -28,7 +35,7 @@ export default function Map({
   setBounds,
   setCoords,
   setChildClicked,
-}) {
+}: MapProps) {
   const classes = useStyles();
 
   const defaultProps = {
@@ -42,7 +49,7 @@ export default function Map({
     <Box className={classes.mapContainer}>
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+          key: "AIzaSyDwyeLKve7vBrj2b1-mHOgM9UKvsqP8Z-c",
           language: "pt-BR",
         }}
         defaultCenter={coords}
@@ -58,9 +65,9 @@ export default function Map({
       >
         {places.length > 0 &&
           places.map((place, index) => (
-            <div
-              lat={Number(place.latitude)}
-              lng={Number(place.longitude)}
+            <ContainerMap
+              lat={parseInt(place.latitude)}
+              lng={parseInt(place.longitude)}
               key={index}
             >
               <LocationOnOutlined color="primary" fontSize="large" />
@@ -73,11 +80,11 @@ export default function Map({
                       ? place.photo.images.large.url
                       : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
                   }
-                  alt="place photo"
+                  alt="place"
                 />
                 <Rating readOnly size="small" value={Number(place.rating)} />
               </Paper>
-            </div>
+            </ContainerMap>
           ))}
       </GoogleMapReact>
     </Box>
