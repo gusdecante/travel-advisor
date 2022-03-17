@@ -26,7 +26,7 @@ export type Place = {
 
 function App() {
   const classes = useStyles();
-  const [type, setType] = useState<any>("restaurants");
+  const [type, setType] = useState<string>("restaurants");
   const [isLoading, setIsLoading] = useState(false);
   const [places, setPlaces] = useState<Place[]>([]);
   const [coords, setCoords] = useState<Coords>();

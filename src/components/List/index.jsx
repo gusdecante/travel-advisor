@@ -8,17 +8,9 @@ import {
 } from "@material-ui/core";
 import { useState, useEffect, createRef } from "react";
 
-import { PlaceDetails } from "../";
+import { PlaceDetails, CustomSelect } from "../";
 
 import useStyles from "./styles";
-
-// interface ListProps {
-//   type: any;
-//   setType: any;
-//   isLoading: any;
-//   childClicked: any;
-//   places: any;
-// }
 
 export default function List({
   type,
@@ -29,10 +21,6 @@ export default function List({
 }) {
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
-
-  useEffect(() => {
-    console.log(type);
-  });
 
   useEffect(() => {
     setElRefs((refs) => {
@@ -51,7 +39,8 @@ export default function List({
         <div>
           <FormControl className={classes.formControl}>
             <InputLabel id="type">Type:</InputLabel>
-            <Select
+            <CustomSelect type={type} setType={setType} />
+            {/* <Select
               id="placeType"
               value={type}
               onChange={(e) => setType(e.target.value)}
@@ -59,7 +48,7 @@ export default function List({
               <MenuItem value="restaurants">Restaurants</MenuItem>
               <MenuItem value="hotels">Hotels</MenuItem>
               <MenuItem value="attractions">Attractions</MenuItem>
-            </Select>
+            </Select> */}
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
             {places &&
